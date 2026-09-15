@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Emu6502/Emu6502.vcxproj" />
+  <Project Path="Emu6502/Emu6502.vcxproj" Id="81d81de8-9b1f-4793-9a56-72f539eb79c4" />
 </Solution>

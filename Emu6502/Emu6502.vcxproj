@@ -71,13 +71,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)\build\$(Configuration\</OutDir>
-    <IntDir>$(SolutionDir)\build\intermediates\$(Configuration\</IntDir>
+    <OutDir>$(SolutionDir)\build\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\build\intermediates\$(Configuration)\</IntDir>
     <IncludePath>.\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)\build\$(Configuration\</OutDir>
-    <IntDir>$(SolutionDir)\build\intermediates\$(Configuration\</IntDir>
+    <OutDir>$(SolutionDir)\build\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\build\intermediates\$(Configuration)\</IntDir>
     <IncludePath>.\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -154,11 +154,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cxx" />
-    <ClCompile Include="template.cxx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="impl\includes.hxx" />
     <ClInclude Include="workspace\core\architecture\cpu.hxx" />
+    <ClInclude Include="workspace\core\bus\memory.hxx" />
+    <ClInclude Include="workspace\core\handlers\interrupt.hxx" />
+    <ClInclude Include="workspace\core\handlers\nmi.hxx" />
+    <ClInclude Include="workspace\core\handlers\power.hxx" />
+    <ClInclude Include="workspace\core\architecture\opcodes.hxx" />
+    <ClInclude Include="workspace\core\bus\registry.hxx" />
+    <ClInclude Include="workspace\utility\logger.hxx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

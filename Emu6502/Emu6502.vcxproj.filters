@@ -18,15 +18,33 @@
     <ClCompile Include="main.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="template.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="impl\includes.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="workspace\core\architecture\cpu.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="workspace\core\bus\memory.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="workspace\core\bus\registry.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="workspace\core\architecture\opcodes.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="workspace\core\handlers\nmi.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="workspace\core\handlers\power.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="workspace\core\handlers\interrupt.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="workspace\utility\logger.hxx">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

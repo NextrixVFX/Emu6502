@@ -1,6 +1,6 @@
 #pragma once
 
-namespace architecture
+namespace bus
 {
 	// ref https://en.wikipedia.org/wiki/MOS_Technology_6502
 	enum processor_states_t : u8
