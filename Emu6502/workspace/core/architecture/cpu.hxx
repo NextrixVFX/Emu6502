@@ -11,6 +11,7 @@ namespace architecture
 		bus::registers_t m_registry{};
 		bus::c_memory m_memory{}; // ram
 		c_opcodes m_opcodes{};
+		u32 m_tick{};
 
 		void initialize()
 		{
@@ -23,20 +24,6 @@ namespace architecture
 
 			// zero out the zeropage
 			m_memory.write(0x0000, _zero_page.m_data);
-
-			// reserved page
-			constexpr u16 resv_start{ 0xFFFA }; // (0xFFFA -> 0xFFFF)
-			u16 nmi_handler = 0x0000; // replace with address of nmi handler
-			u16 power_on_reset = 0x0000; // replace with power on reset location
-			u16 interrupt_request_handler = 0x0000; // replace with the interrupt request handler address
-
-			// write all the reserved handlers
-			m_memory.write(resv_start, nmi_handler);					// 0xFFFA
-			m_memory.write(resv_start + 0x2, power_on_reset);				// 0xFFFC
-			m_memory.write(resv_start + 0x4, interrupt_request_handler);	// 0xFFFE
-
-			// initialize the stack pointer
-			m_registry.sp = 0xFF;
 		}
 
 	public:
@@ -56,6 +43,43 @@ namespace architecture
 			++m_registry.sp;
 			return m_memory.read(m_stack_base + m_registry.sp);
 			
+		}
+
+		void reset()
+		{
+			// reserved page
+			constexpr u16 resv_start{ 0xFFFA }; // (0xFFFA -> 0xFFFF)
+			u16 nmi_handler = 0x0000; // replace with address of nmi handler
+			u16 power_on_reset = 0x0000; // replace with power on reset location
+			u16 interrupt_request_handler = 0x0000; // replace with the interrupt request handler address
+
+			// write all the reserved handlers
+			m_memory.write(resv_start, nmi_handler);					 // 0xFFFA
+			m_memory.write(resv_start + 0x2, power_on_reset);			 // 0xFFFC
+			m_memory.write(resv_start + 0x4, interrupt_request_handler); // 0xFFFE
+
+			// initialize the stack pointer
+			m_registry.sp = 0xFF;
+
+			// initialize the program counter
+			m_registry.pc = 0xFFFC;
+
+			// initialize the 3 registers
+			m_registry.a = 0;
+			m_registry.x = 0;
+			m_registry.y = 0;
+
+			// clear the decimal flag
+			m_registry.clear_flag(bus::processor_states_t::m_decimal_mode);
+		}
+
+		void execute(u32 cycles)
+		{
+			while (cycles > 0)
+			{
+				u8 instruction = m_memory.fetch(m_registry.pc, cycles);
+				m_opcodes.execute(instruction, cycles);
+			}
 		}
 	};
 }

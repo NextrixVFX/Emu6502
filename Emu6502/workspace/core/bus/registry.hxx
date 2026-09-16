@@ -20,9 +20,9 @@ namespace bus
 	{
 		u16 pc{}; // program counter
 		u8 sp{};  // stack ptr (0x00 -> 0xFF) (256 bytes)
-		u8 a{};   // accumulator
-		u8 x{};   // x index
-		u8 y{};   // y index
+		u8 a{};   // accumulator register
+		u8 x{};   // x index register
+		u8 y{};   // y index register
 		u8 p{};   // processor status
 
 		void set_flag(processor_states_t flag)

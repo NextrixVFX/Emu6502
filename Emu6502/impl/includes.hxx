@@ -32,3 +32,4 @@ using namespace utility;
 
 #include <workspace/core/architecture/opcodes.hxx>
 #include <workspace/core/architecture/cpu.hxx>
+using namespace architecture;

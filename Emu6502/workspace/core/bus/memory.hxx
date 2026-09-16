@@ -7,9 +7,23 @@ namespace bus
 	// 6502 expects a little-endian format (smallest byte first written)
 	class c_memory
 	{
-		std::array<u8, 65536> m_ram{};
+		constexpr static size_t m_max_mem = 1024 * 64;
+		std::array<u8, m_max_mem> m_ram{};
 
+		inline void initialize()
+		{
+			// zero out ram
+			for (size_t i{}; i < m_max_mem; i++)
+			{
+				m_ram[i] = 0;
+			}
+		}
 	public:
+		c_memory()
+		{
+			initialize();
+		}
+
 		template<std::integral T>
 		void write(u16 addr, T value)
 		{
@@ -59,7 +73,16 @@ namespace bus
 
 		u8 read(u16 addr) const
 		{
+			//static_assert(addr < (u16)m_max_mem);
 			return m_ram[addr];
+		}
+
+		u8 fetch(u16& pc, u32& cycles) const
+		{
+			u8 inst = read(pc);
+			pc++;
+			cycles--;
+			return inst;
 		}
 	};
 }
